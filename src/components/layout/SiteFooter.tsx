@@ -30,6 +30,7 @@ export function SiteFooter() {
           <div className="mt-4 flex flex-col gap-2 text-sm text-slate-400">
             <Link href="/rutas">Rutas</Link>
             <Link href="/instituciones">Instituciones</Link>
+            <Link href="/mi-red">Mi Red STEM</Link>
             <Link href="/faq">FAQ</Link>
             <a href="https://puenteimpacto.com" target="_blank" rel="noreferrer">
               Puente Impacto ↗
