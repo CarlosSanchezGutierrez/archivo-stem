@@ -9,7 +9,12 @@ import {
   type Node,
   type NodeProps,
 } from "@xyflow/react";
-import { atlasEdges, atlasNodes, type AtlasNode, type AtlasNodeType } from "@/data/atlas";
+import {
+  atlasEdges,
+  atlasNodes,
+  type AtlasNode,
+  type AtlasNodeType,
+} from "@/data/atlas";
 
 type AtlasFlowNode = Node<{ atlasNode: AtlasNode }, "atlasNode">;
 
@@ -49,13 +54,25 @@ const typeOrder: AtlasNodeType[] = [
   "patent",
 ];
 
-function StemNode({ data, selected }: NodeProps<AtlasFlowNode>) {
+const typeDescriptions: Record<AtlasNodeType, string> = {
+  person: "Individuos documentados por su trayectoria y obra.",
+  institution: "Universidades, empresas, centros o entidades vinculadas.",
+  campus: "Sedes o espacios académicos relevantes.",
+  topic: "Áreas de conocimiento, investigación o aplicación.",
+  book: "Libros y publicaciones extensas asociadas al archivo.",
+  project: "Proyectos técnicos, educativos, sociales o industriales.",
+  technology: "Herramientas, plataformas o enfoques técnicos.",
+  course: "Cursos y recursos educativos.",
+  patent: "Propiedad intelectual y transferencia tecnológica.",
+};
+
+function ArchiveNode({ data, selected }: NodeProps<AtlasFlowNode>) {
   const node = data.atlasNode;
 
   return (
     <div
-      className={`w-[156px] rounded-xl border px-3 py-2 shadow-lg backdrop-blur ${typeStyles[node.type]} ${
-        selected ? "ring-2 ring-blue-300/60" : ""
+      className={`w-[148px] rounded-xl border px-3 py-2 shadow-lg backdrop-blur ${typeStyles[node.type]} ${
+        selected ? "ring-2 ring-blue-300/70" : ""
       }`}
     >
       <p className="truncate text-[9px] font-medium uppercase tracking-[0.16em] opacity-70">
@@ -69,19 +86,30 @@ function StemNode({ data, selected }: NodeProps<AtlasFlowNode>) {
 }
 
 const nodeTypes = {
-  atlasNode: StemNode,
+  atlasNode: ArchiveNode,
 };
 
 function getNodePosition(node: AtlasNode, index: number) {
-  const centerX = 420;
+  const centerX = 430;
   const centerY = 300;
 
   if (node.type === "person") {
     return { x: centerX, y: centerY };
   }
 
-  const typeIndex = Math.max(typeOrder.indexOf(node.type), 1);
-  const radius = 150 + typeIndex * 26;
+  const radiusByType: Record<AtlasNodeType, number> = {
+    person: 0,
+    institution: 155,
+    campus: 205,
+    topic: 250,
+    technology: 300,
+    book: 345,
+    project: 390,
+    course: 430,
+    patent: 470,
+  };
+
+  const radius = radiusByType[node.type];
   const angle = (index / atlasNodes.length) * Math.PI * 2 - Math.PI / 2;
 
   return {
@@ -90,7 +118,7 @@ function getNodePosition(node: AtlasNode, index: number) {
   };
 }
 
-function capitalize(text: string) {
+function sentenceCase(text: string) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
@@ -103,20 +131,20 @@ export function StemAtlasGraph() {
       return new Set(atlasNodes.map((node) => node.id));
     }
 
-    const directNodes = new Set(
+    const ids = new Set(
       atlasNodes
         .filter((node) => node.type === activeType || node.type === "person")
         .map((node) => node.id),
     );
 
     atlasEdges.forEach((edge) => {
-      if (directNodes.has(edge.source) || directNodes.has(edge.target)) {
-        directNodes.add(edge.source);
-        directNodes.add(edge.target);
+      if (ids.has(edge.source) || ids.has(edge.target)) {
+        ids.add(edge.source);
+        ids.add(edge.target);
       }
     });
 
-    return directNodes;
+    return ids;
   }, [activeType]);
 
   const nodes: AtlasFlowNode[] = useMemo(
@@ -149,86 +177,128 @@ export function StemAtlasGraph() {
     [visibleNodeIds],
   );
 
+  const selectedConnections = selectedNode
+    ? atlasEdges.filter(
+        (edge) => edge.source === selectedNode.id || edge.target === selectedNode.id,
+      )
+    : [];
+
   return (
-    <div className="grid gap-6 xl:grid-cols-[1fr_360px]">
-      <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#030712]">
-        <div className="flex flex-wrap gap-2 border-b border-white/10 p-4">
-          <button
-            onClick={() => setActiveType("all")}
-            className={`rounded-full px-4 py-2 text-xs font-medium transition ${
-              activeType === "all"
-                ? "bg-blue-500 text-white"
-                : "border border-white/10 text-slate-300 hover:bg-white/10"
-            }`}
-          >
-            Todo
-          </button>
+    <div className="space-y-8">
+      <section className="grid gap-5 lg:grid-cols-3">
+        <ArchiveInstruction
+          label="Cómo leerlo"
+          title="El centro es la trayectoria."
+          text="El mapa parte de una persona y muestra cómo su obra se conecta con instituciones, tecnologías, proyectos, cursos y temas."
+        />
+        <ArchiveInstruction
+          label="Qué significa"
+          title="Las líneas son relaciones."
+          text="Cada conexión representa una acción: publicó, investigó, desarrolló, estudió, colaboró o aplicó conocimiento."
+        />
+        <ArchiveInstruction
+          label="Para qué sirve"
+          title="Encontrar rutas de exploración."
+          text="El Atlas permite descubrir qué temas estudiar, qué recursos consultar y qué perfiles están conectados entre sí."
+        />
+      </section>
 
-          {typeOrder.map((type) => (
-            <button
-              key={type}
-              onClick={() => setActiveType(type)}
-              className={`rounded-full px-4 py-2 text-xs font-medium transition ${
-                activeType === type
-                  ? "bg-blue-500 text-white"
-                  : "border border-white/10 text-slate-300 hover:bg-white/10"
-              }`}
+      <section className="grid gap-6 xl:grid-cols-[1fr_370px]">
+        <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#030712]">
+          <div className="border-b border-white/10 p-4">
+            <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-center">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-300">
+                  Mapa de archivo
+                </p>
+                <p className="mt-1 text-sm text-slate-400">
+                  Filtra por tipo de nodo para observar una capa específica del conocimiento.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                <button
+                  onClick={() => setActiveType("all")}
+                  className={`rounded-full px-4 py-2 text-xs font-medium transition ${
+                    activeType === "all"
+                      ? "bg-blue-500 text-white"
+                      : "border border-white/10 text-slate-300 hover:bg-white/10"
+                  }`}
+                >
+                  Todo
+                </button>
+
+                {typeOrder.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setActiveType(type)}
+                    className={`rounded-full px-4 py-2 text-xs font-medium transition ${
+                      activeType === type
+                        ? "bg-blue-500 text-white"
+                        : "border border-white/10 text-slate-300 hover:bg-white/10"
+                    }`}
+                  >
+                    {typeLabels[type]}
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div className="h-[680px]">
+            <ReactFlow
+              nodes={nodes}
+              edges={edges}
+              nodeTypes={nodeTypes}
+              fitView
+              fitViewOptions={{ padding: 0.18 }}
+              onNodeClick={(_, node) => {
+                const found = atlasNodes.find((item) => item.id === node.id);
+                setSelectedNode(found ?? null);
+              }}
+              proOptions={{ hideAttribution: true }}
             >
-              {typeLabels[type]}
-            </button>
-          ))}
+              <Background color="rgba(148, 163, 184, 0.18)" gap={28} />
+              <Controls />
+            </ReactFlow>
+          </div>
         </div>
 
-        <div className="h-[680px]">
-          <ReactFlow
-            nodes={nodes}
-            edges={edges}
-            nodeTypes={nodeTypes}
-            fitView
-            fitViewOptions={{ padding: 0.16 }}
-            onNodeClick={(_, node) => {
-              const found = atlasNodes.find((item) => item.id === node.id);
-              setSelectedNode(found ?? null);
-            }}
-            proOptions={{ hideAttribution: true }}
-          >
-            <Background color="rgba(148, 163, 184, 0.18)" gap={28} />
-            <Controls />
-          </ReactFlow>
-        </div>
-      </div>
+        <aside className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6">
+          <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-300">
+            Lectura del nodo
+          </p>
 
-      <aside className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-        <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-300">
-          Nodo seleccionado
-        </p>
+          {selectedNode ? (
+            <div className="mt-6">
+              <span className={`inline-flex rounded-full border px-3 py-1 text-xs ${typeStyles[selectedNode.type]}`}>
+                {typeLabels[selectedNode.type]}
+              </span>
 
-        {selectedNode ? (
-          <div className="mt-6">
-            <span className={`inline-flex rounded-full border px-3 py-1 text-xs ${typeStyles[selectedNode.type]}`}>
-              {typeLabels[selectedNode.type]}
-            </span>
+              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">
+                {selectedNode.label}
+              </h2>
 
-            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-white">
-              {selectedNode.label}
-            </h2>
-
-            <p className="mt-4 text-sm leading-7 text-slate-300">
-              {selectedNode.description ?? "Nodo registrado dentro del Atlas STEM."}
-            </p>
-
-            <div className="mt-8">
-              <p className="text-sm font-semibold text-white">
-                Conexiones directas
+              <p className="mt-4 text-sm leading-7 text-slate-300">
+                {selectedNode.description ?? "Nodo registrado dentro del Atlas STEM."}
               </p>
 
-              <div className="mt-4 space-y-3">
-                {atlasEdges
-                  .filter(
-                    (edge) =>
-                      edge.source === selectedNode.id || edge.target === selectedNode.id,
-                  )
-                  .map((edge) => {
+              <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
+                  Tipo de nodo
+                </p>
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  {typeDescriptions[selectedNode.type]}
+                </p>
+              </div>
+
+              <div className="mt-8">
+                <p className="text-sm font-semibold text-white">
+                  Relaciones directas
+                </p>
+
+                <div className="mt-4 space-y-3">
+                  {selectedConnections.map((edge) => {
                     const otherId = edge.source === selectedNode.id ? edge.target : edge.source;
                     const otherNode = atlasNodes.find((node) => node.id === otherId);
 
@@ -237,22 +307,45 @@ export function StemAtlasGraph() {
                         key={edge.id}
                         className="rounded-2xl border border-white/10 bg-black/20 p-4"
                       >
-                        <p className="text-xs text-blue-200">{capitalize(edge.label)}</p>
+                        <p className="text-xs text-blue-200">
+                          {sentenceCase(edge.label)}
+                        </p>
                         <p className="mt-1 text-sm font-medium text-white">
                           {otherNode?.label ?? otherId}
                         </p>
                       </div>
                     );
                   })}
+                </div>
               </div>
             </div>
-          </div>
-        ) : (
-          <p className="mt-6 text-sm text-slate-400">
-            Selecciona un nodo para explorar sus conexiones.
-          </p>
-        )}
-      </aside>
+          ) : (
+            <p className="mt-6 text-sm text-slate-400">
+              Selecciona un nodo para explorar sus conexiones.
+            </p>
+          )}
+        </aside>
+      </section>
     </div>
+  );
+}
+
+function ArchiveInstruction({
+  label,
+  title,
+  text,
+}: {
+  label: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <article className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-5">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">
+        {label}
+      </p>
+      <h3 className="mt-3 text-lg font-semibold text-white">{title}</h3>
+      <p className="mt-2 text-sm leading-7 text-slate-400">{text}</p>
+    </article>
   );
 }

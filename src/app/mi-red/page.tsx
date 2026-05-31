@@ -3,35 +3,36 @@
 export const metadata = {
   title: "Mi Red STEM",
   description:
-    "Red personal conceptual de Archivo STEM para visualizar intereses, perfiles guardados, contactos, instituciones, proyectos, objetivos y recomendaciones.",
+    "Mapa personal conceptual para visualizar intereses, perfiles guardados, contactos, instituciones, proyectos, recursos, objetivos y recomendaciones dentro de Archivo STEM.",
 };
 
 export default function MyNetworkPage() {
   return (
     <section className="min-h-screen bg-[#05070A] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue-300">
-          Mi Red STEM
-        </p>
-
-        <div className="mt-4 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
-            <h1 className="text-5xl font-semibold tracking-tight text-white md:text-6xl">
-              Visualiza tu ecosistema académico, técnico y profesional.
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
+              Mi Red STEM
+            </p>
+
+            <h1 className="mt-5 text-balance text-5xl font-semibold tracking-tight text-white md:text-6xl">
+              Un mapa privado para entender tu ecosistema STEM.
             </h1>
           </div>
 
           <div className="text-base leading-8 text-slate-300">
             <p>
-              Mi Red STEM es una experiencia conceptual para que estudiantes e
-              interesados puedan ver sus perfiles guardados, temas favoritos,
-              contactos, instituciones, proyectos, recursos y objetivos como una
-              red navegable.
+              Mi Red STEM plantea una capa personal del archivo: intereses,
+              perfiles guardados, instituciones, contactos, recursos, proyectos
+              y objetivos organizados como una red privada.
             </p>
+
             <p className="mt-4">
-              La versión futura podrá conectarse con cuentas, Supabase Auth,
-              favoritos, notas, roadmaps personales, historial de aprendizaje,
-              recomendaciones y análisis de conexiones dentro del Atlas STEM.
+              La idea no es copiar LinkedIn. Es ayudar a estudiantes e
+              interesados a comprender qué áreas han explorado, qué personas
+              siguen, qué recursos consultan y qué conexiones podrían fortalecer
+              su desarrollo académico o profesional.
             </p>
           </div>
         </div>

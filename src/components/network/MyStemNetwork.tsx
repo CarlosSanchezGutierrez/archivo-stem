@@ -42,6 +42,17 @@ const nodeTypeStyles: Record<PersonalNetworkNodeType, string> = {
   goal: "border-rose-300/50 bg-rose-500/14 text-rose-50",
 };
 
+const nodeTypeDescriptions: Record<PersonalNetworkNodeType, string> = {
+  user: "Centro privado de la red personal.",
+  person: "Perfiles guardados o personas relevantes para explorar.",
+  contact: "Contactos académicos o profesionales agregados por el usuario.",
+  institution: "Campus, universidades, empresas o instituciones conectadas.",
+  topic: "Áreas de interés, aprendizaje o investigación.",
+  project: "Proyectos propios o del ecosistema del usuario.",
+  resource: "Libros, episodios, conceptos o materiales guardados.",
+  goal: "Objetivos académicos, profesionales o de impacto.",
+};
+
 const nodeTypeOrder: Array<PersonalNetworkNodeType | "all"> = [
   "all",
   "user",
@@ -59,8 +70,8 @@ function PersonalNodeCard({ data, selected }: NodeProps<PersonalFlowNode>) {
 
   return (
     <div
-      className={`w-[156px] rounded-xl border px-3 py-2 shadow-lg backdrop-blur ${nodeTypeStyles[node.type]} ${
-        selected ? "ring-2 ring-blue-300/60" : ""
+      className={`w-[148px] rounded-xl border px-3 py-2 shadow-lg backdrop-blur ${nodeTypeStyles[node.type]} ${
+        selected ? "ring-2 ring-blue-300/70" : ""
       }`}
     >
       <p className="truncate text-[9px] font-medium uppercase tracking-[0.16em] opacity-70">
@@ -78,7 +89,7 @@ const nodeTypes = {
 };
 
 function getPosition(node: PersonalNetworkNode, index: number) {
-  const centerX = 420;
+  const centerX = 430;
   const centerY = 300;
 
   if (node.type === "user") {
@@ -87,13 +98,13 @@ function getPosition(node: PersonalNetworkNode, index: number) {
 
   const radiusByType: Record<PersonalNetworkNodeType, number> = {
     user: 0,
-    person: 150,
-    contact: 195,
-    institution: 230,
-    topic: 270,
-    project: 310,
-    resource: 350,
-    goal: 390,
+    person: 155,
+    contact: 205,
+    institution: 245,
+    topic: 285,
+    project: 330,
+    resource: 375,
+    goal: 420,
   };
 
   const angle = (index / personalNetworkNodes.length) * Math.PI * 2 - Math.PI / 2;
@@ -105,7 +116,7 @@ function getPosition(node: PersonalNetworkNode, index: number) {
   };
 }
 
-function capitalize(text: string) {
+function sentenceCase(text: string) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
@@ -166,24 +177,61 @@ export function MyStemNetwork() {
     [visibleNodeIds],
   );
 
+  const selectedConnections = selectedNode
+    ? personalNetworkEdges.filter(
+        (edge) => edge.source === selectedNode.id || edge.target === selectedNode.id,
+      )
+    : [];
+
   return (
     <div className="space-y-12">
-      <section className="grid gap-6 xl:grid-cols-[1fr_360px]">
-        <div className="overflow-hidden rounded-3xl border border-white/10 bg-[#030712]">
-          <div className="flex flex-wrap gap-2 border-b border-white/10 p-4">
-            {nodeTypeOrder.map((type) => (
-              <button
-                key={type}
-                onClick={() => setSelectedType(type)}
-                className={`rounded-full px-4 py-2 text-xs font-medium transition ${
-                  selectedType === type
-                    ? "bg-blue-500 text-white"
-                    : "border border-white/10 text-slate-300 hover:bg-white/10"
-                }`}
-              >
-                {type === "all" ? "Todo" : nodeTypeLabels[type]}
-              </button>
-            ))}
+      <section className="grid gap-5 lg:grid-cols-3">
+        <NetworkInstruction
+          label="Qué representa"
+          title="Tu mapa personal de exploración."
+          text="La red reúne intereses, perfiles guardados, instituciones, recursos, contactos y objetivos dentro del ecosistema STEM."
+        />
+        <NetworkInstruction
+          label="Qué no hace"
+          title="No extrae contactos sin permiso."
+          text="La versión seria debe ser privada por defecto y depender de datos agregados manualmente o autorizados por el usuario."
+        />
+        <NetworkInstruction
+          label="Para qué sirve"
+          title="Detectar rutas y oportunidades."
+          text="El mapa puede sugerir temas por estudiar, personas por explorar, proyectos por construir y áreas faltantes en tu red."
+        />
+      </section>
+
+      <section className="grid gap-6 xl:grid-cols-[1fr_370px]">
+        <div className="overflow-hidden rounded-[1.75rem] border border-white/10 bg-[#030712]">
+          <div className="border-b border-white/10 p-4">
+            <div className="flex flex-col justify-between gap-4 xl:flex-row xl:items-center">
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-300">
+                  Red personal
+                </p>
+                <p className="mt-1 text-sm text-slate-400">
+                  Filtra por tipo de nodo para leer una capa específica de tu ecosistema.
+                </p>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {nodeTypeOrder.map((type) => (
+                  <button
+                    key={type}
+                    onClick={() => setSelectedType(type)}
+                    className={`rounded-full px-4 py-2 text-xs font-medium transition ${
+                      selectedType === type
+                        ? "bg-blue-500 text-white"
+                        : "border border-white/10 text-slate-300 hover:bg-white/10"
+                    }`}
+                  >
+                    {type === "all" ? "Todo" : nodeTypeLabels[type]}
+                  </button>
+                ))}
+              </div>
+            </div>
           </div>
 
           <div className="h-[680px]">
@@ -192,7 +240,7 @@ export function MyStemNetwork() {
               edges={edges}
               nodeTypes={nodeTypes}
               fitView
-              fitViewOptions={{ padding: 0.16 }}
+              fitViewOptions={{ padding: 0.18 }}
               onNodeClick={(_, node) => {
                 const found = personalNetworkNodes.find((item) => item.id === node.id);
                 setSelectedNode(found ?? null);
@@ -205,9 +253,9 @@ export function MyStemNetwork() {
           </div>
         </div>
 
-        <aside className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+        <aside className="rounded-[1.75rem] border border-white/10 bg-white/[0.04] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-300">
-            Nodo seleccionado
+            Lectura del nodo
           </p>
 
           {selectedNode ? (
@@ -224,6 +272,15 @@ export function MyStemNetwork() {
                 {selectedNode.description}
               </p>
 
+              <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
+                  Tipo de nodo
+                </p>
+                <p className="mt-2 text-sm leading-6 text-slate-300">
+                  {nodeTypeDescriptions[selectedNode.type]}
+                </p>
+              </div>
+
               <div className="mt-5 rounded-2xl border border-white/10 bg-black/20 p-4">
                 <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
                   Fuerza de conexión
@@ -235,31 +292,28 @@ export function MyStemNetwork() {
 
               <div className="mt-8">
                 <p className="text-sm font-semibold text-white">
-                  Conexiones directas
+                  Relaciones directas
                 </p>
 
                 <div className="mt-4 space-y-3">
-                  {personalNetworkEdges
-                    .filter(
-                      (edge) =>
-                        edge.source === selectedNode.id || edge.target === selectedNode.id,
-                    )
-                    .map((edge) => {
-                      const otherId = edge.source === selectedNode.id ? edge.target : edge.source;
-                      const otherNode = personalNetworkNodes.find((node) => node.id === otherId);
+                  {selectedConnections.map((edge) => {
+                    const otherId = edge.source === selectedNode.id ? edge.target : edge.source;
+                    const otherNode = personalNetworkNodes.find((node) => node.id === otherId);
 
-                      return (
-                        <div
-                          key={edge.id}
-                          className="rounded-2xl border border-white/10 bg-black/20 p-4"
-                        >
-                          <p className="text-xs text-blue-200">{capitalize(edge.label)}</p>
-                          <p className="mt-1 text-sm font-medium text-white">
-                            {otherNode?.label ?? otherId}
-                          </p>
-                        </div>
-                      );
-                    })}
+                    return (
+                      <div
+                        key={edge.id}
+                        className="rounded-2xl border border-white/10 bg-black/20 p-4"
+                      >
+                        <p className="text-xs text-blue-200">
+                          {sentenceCase(edge.label)}
+                        </p>
+                        <p className="mt-1 text-sm font-medium text-white">
+                          {otherNode?.label ?? otherId}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -272,13 +326,15 @@ export function MyStemNetwork() {
       </section>
 
       <section className="grid gap-6 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
+        <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.035] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-300">
             Guardados
           </p>
+
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
             Biblioteca personal STEM
           </h2>
+
           <p className="mt-3 text-sm leading-7 text-slate-300">
             En una versión real, aquí vivirán perfiles, episodios, libros,
             conceptos, rutas y proyectos guardados por el usuario.
@@ -288,7 +344,7 @@ export function MyStemNetwork() {
             {savedStemItems.map((item) => (
               <article
                 key={item.id}
-                className="rounded-3xl border border-white/10 bg-black/20 p-5"
+                className="rounded-[1.5rem] border border-white/10 bg-black/20 p-5"
               >
                 <Badge>{item.type}</Badge>
                 <h3 className="mt-4 text-xl font-semibold text-white">
@@ -310,13 +366,15 @@ export function MyStemNetwork() {
           </div>
         </div>
 
-        <div className="rounded-3xl border border-white/10 bg-[#061A2F] p-6">
+        <div className="rounded-[1.75rem] border border-white/10 bg-[#061A2F] p-6">
           <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-300">
             Recomendaciones
           </p>
+
           <h2 className="mt-3 text-3xl font-semibold tracking-tight text-white">
             Próximos movimientos sugeridos
           </h2>
+
           <p className="mt-3 text-sm leading-7 text-slate-300">
             Más adelante, estas recomendaciones podrán generarse con embeddings,
             historial de navegación, relaciones del Atlas STEM y GraphRAG.
@@ -326,7 +384,7 @@ export function MyStemNetwork() {
             {stemRecommendations.map((recommendation) => (
               <article
                 key={recommendation.id}
-                className="rounded-3xl border border-white/10 bg-white/[0.04] p-5"
+                className="rounded-[1.5rem] border border-white/10 bg-white/[0.04] p-5"
               >
                 <Badge>{recommendation.type}</Badge>
                 <h3 className="mt-4 text-xl font-semibold text-white">
@@ -348,35 +406,27 @@ export function MyStemNetwork() {
           </div>
         </div>
       </section>
-
-      <section className="rounded-3xl border border-white/10 bg-white/[0.04] p-8">
-        <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-300">
-              Privacidad
-            </p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-white">
-              La red personal debe ser privada por defecto.
-            </h2>
-          </div>
-
-          <div className="space-y-4 text-sm leading-7 text-slate-300">
-            <p>
-              Mi Red STEM no debe depender de scraping ni de importar contactos
-              sin consentimiento. La versión seria debe permitir que el usuario
-              agregue contactos manualmente, guarde perfiles y decida qué
-              información es privada o visible.
-            </p>
-            <p>
-              La visión es que cada estudiante pueda entender su propio
-              ecosistema: a quién conoce, qué temas domina, qué áreas le faltan,
-              qué perfiles debería explorar y qué conexiones podrían abrirle
-              puertas académicas o profesionales.
-            </p>
-          </div>
-        </div>
-      </section>
     </div>
+  );
+}
+
+function NetworkInstruction({
+  label,
+  title,
+  text,
+}: {
+  label: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <article className="rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-5">
+      <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">
+        {label}
+      </p>
+      <h3 className="mt-3 text-lg font-semibold text-white">{title}</h3>
+      <p className="mt-2 text-sm leading-7 text-slate-400">{text}</p>
+    </article>
   );
 }
 
