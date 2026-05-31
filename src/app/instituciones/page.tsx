@@ -3,35 +3,36 @@
 export const metadata = {
   title: "Instituciones",
   description:
-    "Modo institución de Archivo STEM para usar entrevistas, perfiles, actividades, colecciones y rutas STEM en clases, orientación vocacional y programas educativos.",
+    "Modo institución de Archivo STEM para convertir entrevistas, perfiles y recursos STEM en colecciones educativas, actividades y evidencia de impacto.",
 };
 
 export default function InstitutionsPage() {
   return (
     <section className="min-h-screen bg-[#05070A] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue-300">
-          Modo institución
-        </p>
-
-        <div className="mt-4 grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
-            <h1 className="text-5xl font-semibold tracking-tight text-white md:text-6xl">
-              Archivo STEM como recurso educativo institucional.
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
+              Instituciones
+            </p>
+
+            <h1 className="mt-5 text-balance text-5xl font-semibold tracking-tight text-white md:text-6xl">
+              Convertir el archivo en material educativo reutilizable.
             </h1>
           </div>
 
           <div className="text-base leading-8 text-slate-300">
             <p>
-              Las entrevistas no terminan cuando se publican. Cada conversación
-              puede convertirse en una colección educativa con clips, preguntas,
-              actividades, recursos, rutas de aprendizaje y material para clase.
+              El Modo Institución está pensado para preparatorias, universidades,
+              profesores, grupos estudiantiles y direcciones académicas que
+              quieran usar trayectorias STEM como material de orientación,
+              clase, discusión o cultura científica.
             </p>
+
             <p className="mt-4">
-              Este modo está pensado para preparatorias, universidades, grupos
-              estudiantiles, profesores, direcciones académicas y aliados que
-              quieran fortalecer cultura STEM con materiales serios y
-              reutilizables.
+              Cada colección debe poder convertirse en actividades, preguntas,
+              guías, clips, mapas de conocimiento, entregables y métricas de
+              impacto.
             </p>
           </div>
         </div>
