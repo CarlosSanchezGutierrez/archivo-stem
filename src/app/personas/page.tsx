@@ -1,4 +1,7 @@
-﻿export default function Page() {
+﻿import { PersonCard } from "@/components/people/PersonCard";
+import { people } from "@/data/people";
+
+export default function PeoplePage() {
   return (
     <section className="min-h-[70vh] bg-[#05070A] px-6 py-24">
       <div className="mx-auto max-w-7xl">
@@ -9,18 +12,15 @@
           Personas
         </h1>
         <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-          Explora perfiles de investigadores, profesores, ingenieros, científicos y profesionistas STEM documentados como archivos vivos de trayectoria y conocimiento.
+          Explora perfiles de investigadores, profesores, ingenieros, científicos
+          y profesionistas STEM documentados como archivos vivos de trayectoria y
+          conocimiento.
         </p>
 
-        <div className="mt-12 rounded-3xl border border-white/10 bg-white/[0.03] p-8">
-          <p className="text-sm font-semibold text-white">
-            Próxima implementación
-          </p>
-          <p className="mt-2 text-sm leading-6 text-slate-400">
-            Esta sección ya quedó reservada dentro de la arquitectura del
-            producto. El siguiente paso será conectarla con datos reales,
-            visualizaciones y componentes específicos.
-          </p>
+        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {people.map((person) => (
+            <PersonCard key={person.id} person={person} />
+          ))}
         </div>
       </div>
     </section>

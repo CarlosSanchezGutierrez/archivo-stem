@@ -25,6 +25,43 @@ export type StemPerson = {
   };
 };
 
+export type TimelineEvent = {
+  year: string;
+  title: string;
+  description: string;
+  category:
+    | "Formación"
+    | "Investigación"
+    | "Proyecto"
+    | "Libro"
+    | "Patente"
+    | "Premio"
+    | "Institución";
+};
+
+export type ArchiveResource = {
+  title: string;
+  type: "Libro" | "Paper" | "Patente" | "Curso" | "Proyecto" | "Video";
+  year?: string;
+  description: string;
+  status?: string;
+};
+
+export type KnowledgeConnection = {
+  source: string;
+  relation: string;
+  target: string;
+};
+
+export type StemPersonProfile = StemPerson & {
+  longBio: string;
+  archiveQuestion: string;
+  timeline: TimelineEvent[];
+  resources: ArchiveResource[];
+  projects: ArchiveResource[];
+  knowledgeConnections: KnowledgeConnection[];
+};
+
 export type KnowledgeNode = {
   id: string;
   label: string;

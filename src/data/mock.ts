@@ -1,33 +1,4 @@
-﻿import type { StemPerson } from "@/types/archive";
-
-export const featuredPeople: StemPerson[] = [
-  {
-    id: "pedro-ponce-cruz",
-    name: "Pedro Ponce Cruz",
-    slug: "pedro-ponce-cruz",
-    role: "Investigador",
-    institution: "Tecnológico de Monterrey",
-    campus: "Campus Ciudad de México",
-    headline:
-      "Control inteligente, inteligencia artificial aplicada, smart grids, robótica, manufactura avanzada y educación STEM.",
-    shortBio:
-      "Investigador y profesor con una trayectoria enfocada en convertir teoría de control, inteligencia artificial y sistemas físicos en soluciones aplicadas para industria, energía, educación y proyectos de impacto humano.",
-    areas: [
-      "Control inteligente",
-      "Inteligencia artificial",
-      "Smart grids",
-      "Robótica educativa",
-      "Manufactura avanzada",
-      "Sistemas ciberfísicos",
-    ],
-    stats: {
-      books: 20,
-      papers: 200,
-      patents: 12,
-      years: 24,
-    },
-  },
-];
+﻿export { featuredPeople } from "@/data/people";
 
 export const explorationLines = [
   "Ingeniería y tecnología",
