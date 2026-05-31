@@ -1,26 +1,44 @@
-﻿import { PersonCard } from "@/components/people/PersonCard";
-import { people } from "@/data/people";
+﻿import { PeopleArchiveExplorer } from "@/components/people/PeopleArchiveExplorer";
+
+export const metadata = {
+  title: "Personas",
+  description:
+    "Catálogo de perfiles de investigadores, profesores, ingenieros y científicos documentados como salas de archivo dentro de Archivo STEM.",
+};
 
 export default function PeoplePage() {
   return (
-    <section className="min-h-[70vh] bg-[#05070A] px-6 py-24">
+    <section className="min-h-screen bg-[#05070A] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue-300">
-          Archivo STEM
-        </p>
-        <h1 className="mt-4 text-5xl font-semibold tracking-tight text-white">
-          Personas
-        </h1>
-        <p className="mt-6 max-w-3xl text-lg leading-8 text-slate-300">
-          Explora perfiles de investigadores, profesores, ingenieros, científicos
-          y profesionistas STEM documentados como archivos vivos de trayectoria y
-          conocimiento.
-        </p>
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
+              Personas
+            </p>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {people.map((person) => (
-            <PersonCard key={person.id} person={person} />
-          ))}
+            <h1 className="mt-5 text-balance text-5xl font-semibold tracking-tight text-white md:text-6xl">
+              Trayectorias STEM documentadas como salas de archivo.
+            </h1>
+          </div>
+
+          <div className="text-base leading-8 text-slate-300">
+            <p>
+              Esta sección no busca listar invitados como si fueran episodios de
+              un podcast. Cada persona se documenta como una trayectoria: su
+              formación, instituciones, obra, proyectos, relaciones, preguntas y
+              legado.
+            </p>
+
+            <p className="mt-4">
+              La meta es que estudiantes e instituciones puedan explorar cómo se
+              construye una carrera STEM real a través de décadas de trabajo,
+              investigación, docencia y colaboración.
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-12">
+          <PeopleArchiveExplorer />
         </div>
       </div>
     </section>
