@@ -6,7 +6,7 @@
   --foreground: #f8fafc;
   --muted: #94a3b8;
   --border-soft: rgba(255, 255, 255, 0.1);
-  --blue-glow: rgba(47, 129, 247, 0.28);
+  --blue-glow: rgba(47, 129, 247, 0.24);
 }
 
 * {
@@ -21,8 +21,8 @@ html {
 body {
   margin: 0;
   background:
-    radial-gradient(circle at top right, rgba(47, 129, 247, 0.16), transparent 30rem),
-    radial-gradient(circle at bottom left, rgba(0, 27, 58, 0.85), transparent 34rem),
+    radial-gradient(circle at top right, rgba(31, 111, 235, 0.13), transparent 34rem),
+    radial-gradient(circle at bottom left, rgba(0, 27, 58, 0.72), transparent 36rem),
     #05070a;
   color: var(--foreground);
   text-rendering: geometricPrecision;
@@ -31,7 +31,7 @@ body {
 }
 
 ::selection {
-  background: rgba(47, 129, 247, 0.45);
+  background: rgba(47, 129, 247, 0.42);
   color: #ffffff;
 }
 
@@ -62,21 +62,38 @@ a {
   display: none;
 }
 
+.react-flow__node {
+  background: transparent !important;
+  border: 0 !important;
+  color: inherit !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+.react-flow__handle {
+  opacity: 0;
+}
+
+.react-flow__edge-path {
+  stroke-linecap: round;
+}
+
 .museum-grid {
   background-image:
-    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
   background-size: 48px 48px;
 }
 
-.museum-card {
+.archive-panel {
   border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.04);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.048), rgba(255, 255, 255, 0.026));
   box-shadow: 0 24px 80px rgba(0, 0, 0, 0.24);
   backdrop-filter: blur(20px);
 }
 
-.museum-card-hover {
+.archive-panel-hover {
   transition:
     border-color 180ms ease,
     background 180ms ease,
@@ -84,11 +101,11 @@ a {
     box-shadow 180ms ease;
 }
 
-.museum-card-hover:hover {
+.archive-panel-hover:hover {
   transform: translateY(-2px);
-  border-color: rgba(96, 165, 250, 0.42);
-  background: rgba(59, 130, 246, 0.075);
-  box-shadow: 0 28px 90px rgba(30, 64, 175, 0.18);
+  border-color: rgba(96, 165, 250, 0.38);
+  background: rgba(59, 130, 246, 0.07);
+  box-shadow: 0 28px 90px rgba(30, 64, 175, 0.16);
 }
 
 .text-balance {

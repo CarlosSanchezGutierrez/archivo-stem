@@ -3,80 +3,81 @@
 export function HeroSection() {
   return (
     <section className="relative overflow-hidden bg-[#05070A]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(47,129,247,0.25),transparent_35%),radial-gradient(circle_at_bottom_left,rgba(0,27,58,0.9),transparent_35%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(31,111,235,0.20),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(0,27,58,0.82),transparent_36%)]" />
       <div className="absolute inset-0 museum-grid" />
 
-      <div className="relative mx-auto grid min-h-[calc(100vh-73px)] max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-[1.08fr_0.92fr]">
+      <div className="relative mx-auto grid min-h-[calc(100vh-73px)] max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
-          <div className="mb-6 inline-flex rounded-full border border-blue-400/25 bg-blue-500/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-blue-200 shadow-[0_0_40px_rgba(47,129,247,0.12)]">
-            Museo digital · Knowledge Graphs · Educación STEM
+          <div className="mb-6 inline-flex rounded-full border border-blue-400/25 bg-blue-500/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.22em] text-blue-200">
+            Archivo académico de trayectorias STEM
           </div>
 
           <h1 className="max-w-5xl text-balance text-5xl font-semibold tracking-tight text-white md:text-7xl">
-            Las trayectorias STEM también merecen un museo.
+            Preservar la obra de quienes construyen conocimiento.
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-            Archivo STEM preserva el conocimiento de investigadores, profesores,
-            ingenieros y científicos mediante entrevistas, perfiles, líneas
-            temporales, biblioteca, grafos de conocimiento y rutas de aprendizaje.
+            Archivo STEM documenta a investigadores, profesores, ingenieros y
+            científicos a través de entrevistas, perfiles, bibliotecas, líneas
+            temporales y redes de conocimiento.
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/personas"
-              className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_40px_rgba(47,129,247,0.22)] transition hover:bg-blue-400"
+              className="rounded-full bg-blue-500 px-6 py-3 text-sm font-semibold text-white shadow-[0_0_34px_rgba(47,129,247,0.18)] transition hover:bg-blue-400"
             >
               Explorar personas
             </Link>
             <Link
-              href="/rutas"
+              href="/atlas"
               className="rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
             >
-              Iniciar experiencia
+              Ver red de conocimiento
             </Link>
           </div>
 
           <div className="mt-10 grid max-w-2xl gap-3 sm:grid-cols-3">
-            <HeroStat value="Personas" label="No solo episodios" />
-            <HeroStat value="Grafos" label="Relaciones vivas" />
-            <HeroStat value="ODS 4" label="Educación de calidad" />
+            <HeroStat value="Trayectorias" label="Personas, no solo episodios" />
+            <HeroStat value="Obra" label="Libros, papers y proyectos" />
+            <HeroStat value="Relaciones" label="Instituciones, temas y redes" />
           </div>
         </div>
 
-        <div className="museum-card rounded-[2rem] p-4">
-          <div className="rounded-[1.5rem] border border-white/10 bg-[#061A2F] p-5">
+        <div className="archive-panel rounded-[1.75rem] p-4">
+          <div className="rounded-[1.25rem] border border-white/10 bg-[#061A2F] p-5">
             <div className="mb-4 flex items-center justify-between gap-4">
               <div>
-                <p className="text-xs font-medium uppercase tracking-[0.24em] text-blue-200">
-                  Sala piloto
+                <p className="text-xs font-medium uppercase tracking-[0.22em] text-blue-200">
+                  Sala de archivo
                 </p>
                 <p className="mt-1 text-sm text-slate-400">
                   Trayectoria, obra, red y legado.
                 </p>
               </div>
               <p className="rounded-full bg-white/10 px-3 py-1 text-xs text-slate-300">
-                Próximamente
+                Piloto
               </p>
             </div>
 
             <div className="relative flex aspect-video items-center justify-center overflow-hidden rounded-2xl border border-blue-400/20 bg-black/40">
-              <div className="absolute inset-0 museum-grid opacity-40" />
+              <div className="absolute inset-0 museum-grid opacity-35" />
               <div className="relative text-center">
                 <p className="text-sm font-semibold text-white">
-                  Video destacado
+                  Entrevista principal
                 </p>
-                <p className="mt-2 text-xs text-slate-400">
-                  Entrevista completa + clips + transcripción + recursos.
+                <p className="mt-2 max-w-xs text-xs leading-5 text-slate-400">
+                  Video, transcripción, ideas clave, clips, recursos y preguntas
+                  de legado.
                 </p>
               </div>
             </div>
 
             <div className="mt-5 grid gap-3 sm:grid-cols-3">
               {[
-                ["Timeline", "Hitos"],
+                ["Línea temporal", "Hitos"],
                 ["Biblioteca", "Obra"],
-                ["Atlas", "Conexiones"],
+                ["Atlas", "Relaciones"],
               ].map(([title, subtitle]) => (
                 <div
                   key={title}
@@ -89,12 +90,12 @@ export function HeroSection() {
             </div>
 
             <div className="mt-5 rounded-2xl border border-blue-400/20 bg-blue-500/10 p-4">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-200">
+              <p className="text-xs font-semibold uppercase tracking-[0.18em] text-blue-200">
                 Pregunta de legado
               </p>
               <p className="mt-2 text-sm leading-6 text-slate-300">
                 ¿Qué conocimiento debería preservarse para las próximas
-                generaciones de ingenieros, científicos y profesores?
+                generaciones de estudiantes, ingenieros e investigadores?
               </p>
             </div>
           </div>

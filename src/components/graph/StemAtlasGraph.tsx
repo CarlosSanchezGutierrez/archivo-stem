@@ -4,23 +4,25 @@ import { useMemo, useState } from "react";
 import {
   Background,
   Controls,
-  MiniMap,
   ReactFlow,
   type Edge,
   type Node,
+  type NodeProps,
 } from "@xyflow/react";
 import { atlasEdges, atlasNodes, type AtlasNode, type AtlasNodeType } from "@/data/atlas";
 
+type AtlasFlowNode = Node<{ atlasNode: AtlasNode }, "atlasNode">;
+
 const typeStyles: Record<AtlasNodeType, string> = {
-  person: "border-blue-300/60 bg-blue-500/20 text-blue-50",
-  institution: "border-cyan-300/50 bg-cyan-500/15 text-cyan-50",
-  campus: "border-sky-300/50 bg-sky-500/15 text-sky-50",
-  topic: "border-indigo-300/50 bg-indigo-500/15 text-indigo-50",
-  book: "border-amber-300/50 bg-amber-500/15 text-amber-50",
-  project: "border-emerald-300/50 bg-emerald-500/15 text-emerald-50",
-  technology: "border-violet-300/50 bg-violet-500/15 text-violet-50",
-  course: "border-rose-300/50 bg-rose-500/15 text-rose-50",
-  patent: "border-orange-300/50 bg-orange-500/15 text-orange-50",
+  person: "border-blue-300/70 bg-blue-500/18 text-blue-50",
+  institution: "border-cyan-300/50 bg-cyan-500/14 text-cyan-50",
+  campus: "border-sky-300/50 bg-sky-500/14 text-sky-50",
+  topic: "border-indigo-300/50 bg-indigo-500/14 text-indigo-50",
+  book: "border-amber-300/50 bg-amber-500/14 text-amber-50",
+  project: "border-emerald-300/50 bg-emerald-500/14 text-emerald-50",
+  technology: "border-violet-300/50 bg-violet-500/14 text-violet-50",
+  course: "border-rose-300/50 bg-rose-500/14 text-rose-50",
+  patent: "border-orange-300/50 bg-orange-500/14 text-orange-50",
 };
 
 const typeLabels: Record<AtlasNodeType, string> = {
@@ -47,22 +49,49 @@ const typeOrder: AtlasNodeType[] = [
   "patent",
 ];
 
+function StemNode({ data, selected }: NodeProps<AtlasFlowNode>) {
+  const node = data.atlasNode;
+
+  return (
+    <div
+      className={`w-[156px] rounded-xl border px-3 py-2 shadow-lg backdrop-blur ${typeStyles[node.type]} ${
+        selected ? "ring-2 ring-blue-300/60" : ""
+      }`}
+    >
+      <p className="truncate text-[9px] font-medium uppercase tracking-[0.16em] opacity-70">
+        {typeLabels[node.type]}
+      </p>
+      <p className="mt-1 line-clamp-2 text-xs font-semibold leading-snug">
+        {node.label}
+      </p>
+    </div>
+  );
+}
+
+const nodeTypes = {
+  atlasNode: StemNode,
+};
+
 function getNodePosition(node: AtlasNode, index: number) {
-  const centerX = 520;
+  const centerX = 420;
   const centerY = 300;
 
   if (node.type === "person") {
     return { x: centerX, y: centerY };
   }
 
-  const typeIndex = typeOrder.indexOf(node.type);
-  const radius = 210 + typeIndex * 28;
+  const typeIndex = Math.max(typeOrder.indexOf(node.type), 1);
+  const radius = 150 + typeIndex * 26;
   const angle = (index / atlasNodes.length) * Math.PI * 2 - Math.PI / 2;
 
   return {
     x: centerX + Math.cos(angle) * radius,
     y: centerY + Math.sin(angle) * radius,
   };
+}
+
+function capitalize(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 export function StemAtlasGraph() {
@@ -90,24 +119,15 @@ export function StemAtlasGraph() {
     return directNodes;
   }, [activeType]);
 
-  const nodes: Node[] = useMemo(
+  const nodes: AtlasFlowNode[] = useMemo(
     () =>
       atlasNodes
         .filter((node) => visibleNodeIds.has(node.id))
         .map((node, index) => ({
           id: node.id,
+          type: "atlasNode",
           position: getNodePosition(node, index),
-          data: {
-            label: (
-              <div className="max-w-[180px]">
-                <p className="text-[10px] uppercase tracking-[0.18em] opacity-70">
-                  {typeLabels[node.type]}
-                </p>
-                <p className="mt-1 text-sm font-semibold leading-tight">{node.label}</p>
-              </div>
-            ),
-          },
-          className: `rounded-2xl border px-4 py-3 shadow-lg backdrop-blur ${typeStyles[node.type]}`,
+          data: { atlasNode: node },
         })),
     [visibleNodeIds],
   );
@@ -120,18 +140,10 @@ export function StemAtlasGraph() {
           id: edge.id,
           source: edge.source,
           target: edge.target,
-          label: edge.label,
           animated: edge.source === "pedro-ponce" || edge.target === "pedro-ponce",
           style: {
-            stroke: "rgba(147, 197, 253, 0.55)",
-            strokeWidth: 1.5,
-          },
-          labelStyle: {
-            fill: "rgb(203, 213, 225)",
-            fontSize: 11,
-          },
-          labelBgStyle: {
-            fill: "rgba(5, 7, 10, 0.85)",
+            stroke: "rgba(125, 171, 232, 0.42)",
+            strokeWidth: 1.35,
           },
         })),
     [visibleNodeIds],
@@ -167,31 +179,27 @@ export function StemAtlasGraph() {
           ))}
         </div>
 
-        <div className="h-[720px]">
+        <div className="h-[680px]">
           <ReactFlow
             nodes={nodes}
             edges={edges}
+            nodeTypes={nodeTypes}
             fitView
+            fitViewOptions={{ padding: 0.16 }}
             onNodeClick={(_, node) => {
               const found = atlasNodes.find((item) => item.id === node.id);
               setSelectedNode(found ?? null);
             }}
             proOptions={{ hideAttribution: true }}
           >
-            <Background color="rgba(148, 163, 184, 0.22)" gap={28} />
+            <Background color="rgba(148, 163, 184, 0.18)" gap={28} />
             <Controls />
-            <MiniMap
-              pannable
-              zoomable
-              nodeStrokeWidth={3}
-              maskColor="rgba(5, 7, 10, 0.7)"
-            />
           </ReactFlow>
         </div>
       </div>
 
       <aside className="rounded-3xl border border-white/10 bg-white/[0.04] p-6">
-        <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
+        <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-300">
           Nodo seleccionado
         </p>
 
@@ -229,7 +237,7 @@ export function StemAtlasGraph() {
                         key={edge.id}
                         className="rounded-2xl border border-white/10 bg-black/20 p-4"
                       >
-                        <p className="text-xs text-blue-200">{edge.label}</p>
+                        <p className="text-xs text-blue-200">{capitalize(edge.label)}</p>
                         <p className="mt-1 text-sm font-medium text-white">
                           {otherNode?.label ?? otherId}
                         </p>

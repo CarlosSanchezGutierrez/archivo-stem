@@ -19,24 +19,24 @@ export function SiteHeader() {
   const allLinks = [...siteConfig.primaryNav, ...siteConfig.secondaryNav];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#05070A]/82 backdrop-blur-2xl">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#05070A]/88 backdrop-blur-2xl">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-6">
         <Link
           href="/"
           className="group flex min-w-0 items-center gap-3"
           onClick={() => setMobileOpen(false)}
         >
-          <div className="relative h-10 w-10 shrink-0 rounded-2xl border border-blue-400/30 bg-blue-500/10 shadow-[0_0_44px_rgba(47,129,247,0.28)]">
-            <div className="absolute inset-2 rounded-xl border border-blue-300/20" />
-            <div className="absolute left-1/2 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-200" />
+          <div className="relative h-10 w-10 shrink-0 rounded-xl border border-blue-400/30 bg-[#07111f] shadow-[0_0_34px_rgba(47,129,247,0.18)]">
+            <div className="absolute inset-2 rounded-lg border border-blue-300/20" />
+            <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-200" />
           </div>
 
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold tracking-[0.28em] text-white">
+            <p className="truncate text-sm font-semibold tracking-[0.24em] text-white">
               ARCHIVO STEM
             </p>
-            <p className="truncate text-xs text-slate-400">
-              Museo digital de trayectorias
+            <p className="truncate text-xs text-slate-500">
+              Archivo de conocimiento
             </p>
           </div>
         </Link>
@@ -69,14 +69,14 @@ export function SiteHeader() {
             </button>
 
             {moreOpen ? (
-              <div className="absolute right-0 mt-3 w-56 rounded-3xl border border-white/10 bg-[#07111f]/95 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
+              <div className="absolute right-0 mt-3 w-64 rounded-2xl border border-white/10 bg-[#07111f]/96 p-2 shadow-2xl shadow-black/40 backdrop-blur-xl">
                 {siteConfig.secondaryNav.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`block rounded-2xl px-4 py-3 text-sm transition ${
+                    className={`block rounded-xl px-4 py-3 text-sm transition ${
                       isActive(pathname, item.href)
-                        ? "bg-blue-500/20 text-white"
+                        ? "bg-blue-500/18 text-white"
                         : "text-slate-300 hover:bg-white/10 hover:text-white"
                     }`}
                   >
@@ -93,13 +93,13 @@ export function SiteHeader() {
             rel="noreferrer"
             className="ml-2 rounded-full bg-[#F5F1E8] px-4 py-2 text-sm font-medium text-[#001B3A] transition hover:bg-white"
           >
-            Puente Impacto ↗
+            Puente Impacto
           </a>
         </nav>
 
         <button
           onClick={() => setMobileOpen((value) => !value)}
-          className="rounded-2xl border border-white/10 bg-white/[0.04] p-2 text-white lg:hidden"
+          className="rounded-xl border border-white/10 bg-white/[0.04] p-2 text-white lg:hidden"
           aria-label="Abrir menú"
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -114,9 +114,9 @@ export function SiteHeader() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
-                className={`rounded-2xl px-4 py-3 text-sm transition ${
+                className={`rounded-xl px-4 py-3 text-sm transition ${
                   isActive(pathname, item.href)
-                    ? "bg-blue-500/20 text-white"
+                    ? "bg-blue-500/18 text-white"
                     : "text-slate-300 hover:bg-white/10 hover:text-white"
                 }`}
               >
@@ -128,9 +128,9 @@ export function SiteHeader() {
               href={siteConfig.puenteImpactoUrl}
               target="_blank"
               rel="noreferrer"
-              className="mt-2 rounded-2xl bg-[#F5F1E8] px-4 py-3 text-sm font-medium text-[#001B3A]"
+              className="mt-2 rounded-xl bg-[#F5F1E8] px-4 py-3 text-sm font-medium text-[#001B3A]"
             >
-              Puente Impacto ↗
+              Puente Impacto
             </a>
           </div>
         </div>
