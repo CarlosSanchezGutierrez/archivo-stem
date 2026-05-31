@@ -5,19 +5,22 @@ const modes = [
     title: "Modo estudiante",
     href: "/rutas",
     description:
-      "Cuestionario inicial para recomendar roadmaps, perfiles, conceptos y proyectos según intereses y etapa académica.",
+      "Exploración guiada para descubrir áreas, perfiles, conceptos y proyectos según intereses y etapa académica.",
+    note: "Orientación y aprendizaje",
   },
   {
     title: "Modo institución",
     href: "/instituciones",
     description:
-      "Colecciones educativas, actividades para clase, guías de discusión y métricas para preparatorias y universidades.",
+      "Colecciones y actividades para usar entrevistas como material de clase, orientación vocacional o cultura STEM.",
+    note: "Uso educativo",
   },
   {
     title: "Mi Red STEM",
     href: "/mi-red",
     description:
-      "Mapa personal de intereses, perfiles guardados, contactos, instituciones, objetivos y recomendaciones.",
+      "Mapa personal de intereses, perfiles guardados, instituciones, contactos y objetivos de aprendizaje.",
+    note: "Exploración personal",
   },
 ];
 
@@ -25,36 +28,42 @@ export function ModesPreviewSection() {
   return (
     <section className="bg-[#061A2F] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue-300">
-            Modos de exploración
-          </p>
-          <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-white md:text-5xl">
-            El archivo cambia según quién lo explora.
-          </h2>
-          <p className="mt-5 text-base leading-8 text-slate-300">
-            La misma base de conocimiento puede servir para orientación
-            vocacional, clases, investigación, networking académico o cultura
-            científica.
-          </p>
-        </div>
+        <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
+              Experiencias
+            </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-3">
-          {modes.map((mode) => (
-            <Link
-              key={mode.href}
-              href={mode.href}
-              className="museum-card museum-card-hover rounded-3xl p-6"
-            >
-              <p className="text-xl font-semibold text-white">{mode.title}</p>
-              <p className="mt-3 text-sm leading-7 text-slate-400">
-                {mode.description}
-              </p>
-              <p className="mt-6 text-sm font-semibold text-blue-200">
-                Explorar →
-              </p>
-            </Link>
-          ))}
+            <h2 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-white md:text-5xl">
+              La misma base de conocimiento puede servir a públicos distintos.
+            </h2>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-3">
+            {modes.map((mode) => (
+              <Link
+                key={mode.href}
+                href={mode.href}
+                className="archive-panel archive-panel-hover rounded-3xl p-6"
+              >
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-blue-300">
+                  {mode.note}
+                </p>
+
+                <h3 className="mt-5 text-xl font-semibold text-white">
+                  {mode.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-7 text-slate-400">
+                  {mode.description}
+                </p>
+
+                <p className="mt-6 text-sm font-semibold text-blue-200">
+                  Abrir sección
+                </p>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

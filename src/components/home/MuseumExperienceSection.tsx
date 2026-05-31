@@ -1,58 +1,69 @@
-﻿const layers = [
+﻿const archiveLayers = [
   {
-    title: "Sala de persona",
+    label: "Sala",
+    title: "Perfil de trayectoria",
     description:
-      "Cada investigador, profesor o ingeniero tiene un perfil con biografía, áreas, estadísticas, línea temporal, obra, proyectos y legado.",
+      "Una página dedicada a cada persona con biografía, áreas, instituciones, línea temporal, entrevista, obra y proyectos.",
   },
   {
-    title: "Objetos de conocimiento",
+    label: "Objeto",
+    title: "Biblioteca curada",
     description:
-      "Libros, papers, patentes, cursos, videos y proyectos se convierten en piezas curadas dentro de una biblioteca viva.",
+      "Cada libro, paper, patente, curso o proyecto se registra con contexto: qué es, por qué importa y cómo se conecta con la trayectoria.",
   },
   {
-    title: "Red de relaciones",
+    label: "Red",
+    title: "Atlas de conocimiento",
     description:
-      "El Atlas STEM conecta personas, campus, instituciones, tecnologías, temas y proyectos como un grafo explorable.",
+      "Personas, temas, campus, tecnologías y proyectos se conectan en una red navegable para entender relaciones entre áreas STEM.",
   },
   {
-    title: "Experiencias guiadas",
+    label: "Uso",
+    title: "Experiencia educativa",
     description:
-      "Estudiantes e instituciones pueden convertir el archivo en roadmaps, actividades, colecciones y rutas educativas.",
+      "El archivo se convierte en rutas, actividades, preguntas, colecciones y materiales para estudiantes, profesores e instituciones.",
   },
 ];
 
 export function MuseumExperienceSection() {
   return (
-    <section className="bg-[#05070A] px-6 py-24">
+    <section className="bg-[#030712] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div>
-            <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue-300">
-              Diseño conceptual
-            </p>
-            <h2 className="mt-4 text-balance text-4xl font-semibold tracking-tight text-white md:text-5xl">
-              Una experiencia tipo museo digital, no una página de podcast.
-            </h2>
-          </div>
+        <div className="max-w-3xl">
+          <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
+            Modelo de archivo
+          </p>
 
-          <div className="grid gap-4 sm:grid-cols-2">
-            {layers.map((layer, index) => (
-              <article
-                key={layer.title}
-                className="museum-card museum-card-hover rounded-3xl p-6"
-              >
-                <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-blue-400/25 bg-blue-500/10 text-sm font-semibold text-blue-100">
-                  {String(index + 1).padStart(2, "0")}
-                </div>
-                <h3 className="mt-5 text-xl font-semibold text-white">
-                  {layer.title}
-                </h3>
-                <p className="mt-3 text-sm leading-7 text-slate-400">
-                  {layer.description}
-                </p>
-              </article>
-            ))}
-          </div>
+          <h2 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-white md:text-5xl">
+            Una trayectoria se puede recorrer como una exposición.
+          </h2>
+
+          <p className="mt-5 text-base leading-8 text-slate-300">
+            La entrevista es solo el punto de entrada. El valor está en convertir
+            cada conversación en una estructura consultable: persona, obra,
+            relaciones, recursos y legado.
+          </p>
+        </div>
+
+        <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+          {archiveLayers.map((layer) => (
+            <article
+              key={layer.title}
+              className="archive-panel archive-panel-hover rounded-3xl p-6"
+            >
+              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-300">
+                {layer.label}
+              </p>
+
+              <h3 className="mt-5 text-xl font-semibold text-white">
+                {layer.title}
+              </h3>
+
+              <p className="mt-3 text-sm leading-7 text-slate-400">
+                {layer.description}
+              </p>
+            </article>
+          ))}
         </div>
       </div>
     </section>

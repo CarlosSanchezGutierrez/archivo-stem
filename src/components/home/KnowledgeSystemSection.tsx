@@ -1,36 +1,91 @@
-﻿import { platformModules } from "@/data/mock";
+﻿const systemRows = [
+  {
+    entity: "Persona",
+    relation: "publicó",
+    target: "Libro",
+  },
+  {
+    entity: "Persona",
+    relation: "desarrolló",
+    target: "Proyecto",
+  },
+  {
+    entity: "Persona",
+    relation: "trabajó en",
+    target: "Institución",
+  },
+  {
+    entity: "Episodio",
+    relation: "trata sobre",
+    target: "Tema",
+  },
+  {
+    entity: "Curso",
+    relation: "enseña",
+    target: "Concepto",
+  },
+  {
+    entity: "Patente",
+    relation: "aplica",
+    target: "Tecnología",
+  },
+];
 
 export function KnowledgeSystemSection() {
   return (
     <section className="bg-[#05070A] px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <div className="max-w-3xl">
-          <p className="text-sm font-semibold uppercase tracking-[0.28em] text-blue-300">
-            Arquitectura de conocimiento
-          </p>
-          <h2 className="mt-4 text-4xl font-semibold tracking-tight text-white">
-            Una plataforma construida alrededor de personas, relaciones y
-            aprendizaje.
-          </h2>
-          <p className="mt-5 text-base leading-8 text-slate-300">
-            Archivo STEM modela trayectorias como grafos de conocimiento:
-            personas, instituciones, campus, temas, proyectos, libros, papers,
-            patentes, cursos y episodios conectados entre sí.
-          </p>
-        </div>
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <div>
+            <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
+              Estructura de conocimiento
+            </p>
 
-        <div className="mt-12 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {platformModules.map((module) => (
-            <div
-              key={module.title}
-              className="rounded-3xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-blue-400/30 hover:bg-blue-500/[0.06]"
-            >
-              <p className="text-lg font-semibold text-white">{module.title}</p>
-              <p className="mt-3 text-sm leading-6 text-slate-400">
-                {module.description}
+            <h2 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-white md:text-5xl">
+              El archivo se diseña como un grafo, no como una lista de páginas.
+            </h2>
+
+            <p className="mt-5 text-base leading-8 text-slate-300">
+              Desde el inicio, cada elemento debe poder relacionarse con otros.
+              Esto prepara la plataforma para búsqueda semántica, Atlas STEM,
+              recomendaciones, GraphRAG y análisis de trayectorias.
+            </p>
+          </div>
+
+          <div className="archive-panel rounded-[1.75rem] p-6">
+            <div className="space-y-3">
+              {systemRows.map((row) => (
+                <div
+                  key={`${row.entity}-${row.relation}-${row.target}`}
+                  className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-2xl border border-white/10 bg-black/20 p-4"
+                >
+                  <div className="rounded-xl border border-blue-400/20 bg-blue-500/10 px-3 py-2 text-sm font-medium text-blue-100">
+                    {row.entity}
+                  </div>
+
+                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                    {row.relation}
+                  </div>
+
+                  <div className="rounded-xl border border-white/10 bg-white/[0.035] px-3 py-2 text-sm font-medium text-white">
+                    {row.target}
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-2xl border border-blue-400/20 bg-blue-500/10 p-5">
+              <p className="text-sm font-semibold text-white">
+                Resultado esperado
+              </p>
+              <p className="mt-2 text-sm leading-7 text-slate-300">
+                Una plataforma donde el usuario no solo encuentra contenido,
+                sino relaciones: quién enseñó qué, quién publicó qué, qué
+                tecnología conecta con qué proyecto y qué ruta de aprendizaje
+                surge de una trayectoria.
               </p>
             </div>
-          ))}
+          </div>
         </div>
       </div>
     </section>
