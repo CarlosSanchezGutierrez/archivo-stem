@@ -6,13 +6,13 @@ export function HeroSection() {
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(31,111,235,0.20),transparent_34%),radial-gradient(circle_at_bottom_left,rgba(0,27,58,0.82),transparent_36%)]" />
       <div className="absolute inset-0 museum-grid" />
 
-      <div className="relative mx-auto grid min-h-[calc(100vh-73px)] max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="relative mx-auto grid min-h-[calc(100vh-73px)] max-w-7xl items-center gap-12 px-5 py-16 md:px-6 md:py-20 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <div className="mb-6 inline-flex rounded-full border border-blue-400/25 bg-blue-500/10 px-4 py-2 text-xs font-medium uppercase tracking-[0.22em] text-blue-200">
             Archivo académico de trayectorias STEM
           </div>
 
-          <h1 className="max-w-5xl text-balance text-5xl font-semibold tracking-tight text-white md:text-7xl">
+          <h1 className="max-w-5xl text-balance text-4xl font-semibold tracking-tight text-white md:text-7xl">
             Preservar la obra de quienes construyen conocimiento.
           </h1>
 
@@ -113,3 +113,4 @@ function HeroStat({ value, label }: { value: string; label: string }) {
     </div>
   );
 }
+

@@ -234,7 +234,7 @@ export function MyStemNetwork() {
             </div>
           </div>
 
-          <div className="h-[680px]">
+          <div className="graph-canvas">
             <ReactFlow
               nodes={nodes}
               edges={edges}
@@ -437,3 +437,4 @@ function Badge({ children }: { children: React.ReactNode }) {
     </span>
   );
 }
+

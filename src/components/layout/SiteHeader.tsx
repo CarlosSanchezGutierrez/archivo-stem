@@ -19,29 +19,29 @@ export function SiteHeader() {
   const allLinks = [...siteConfig.primaryNav, ...siteConfig.secondaryNav];
 
   return (
-    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#05070A]/88 backdrop-blur-2xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-4 lg:px-6">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-[#05070A]/90 backdrop-blur-2xl">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 lg:px-6">
         <Link
           href="/"
           className="group flex min-w-0 items-center gap-3"
           onClick={() => setMobileOpen(false)}
         >
-          <div className="relative h-10 w-10 shrink-0 rounded-xl border border-blue-400/30 bg-[#07111f] shadow-[0_0_34px_rgba(47,129,247,0.18)]">
+          <div className="relative h-9 w-9 shrink-0 rounded-xl border border-blue-400/30 bg-[#07111f] shadow-[0_0_30px_rgba(47,129,247,0.16)]">
             <div className="absolute inset-2 rounded-lg border border-blue-300/20" />
             <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-200" />
           </div>
 
           <div className="min-w-0">
-            <p className="truncate text-sm font-semibold tracking-[0.24em] text-white">
+            <p className="truncate text-sm font-semibold tracking-[0.22em] text-white">
               ARCHIVO STEM
             </p>
-            <p className="truncate text-xs text-slate-500">
+            <p className="hidden truncate text-xs text-slate-500 sm:block">
               Archivo de conocimiento
             </p>
           </div>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex">
+        <nav className="hidden items-center gap-1 xl:flex">
           {siteConfig.primaryNav.map((item) => (
             <Link
               key={item.href}
@@ -99,15 +99,16 @@ export function SiteHeader() {
 
         <button
           onClick={() => setMobileOpen((value) => !value)}
-          className="rounded-xl border border-white/10 bg-white/[0.04] p-2 text-white lg:hidden"
+          className="rounded-xl border border-white/10 bg-white/[0.04] p-2 text-white xl:hidden"
           aria-label="Abrir menú"
+          aria-expanded={mobileOpen}
         >
           {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
       {mobileOpen ? (
-        <div className="border-t border-white/10 bg-[#05070A]/96 px-5 py-4 backdrop-blur-2xl lg:hidden">
+        <div className="border-t border-white/10 bg-[#05070A]/96 px-5 py-4 backdrop-blur-2xl xl:hidden">
           <div className="mx-auto grid max-w-7xl gap-2">
             {allLinks.map((item) => (
               <Link

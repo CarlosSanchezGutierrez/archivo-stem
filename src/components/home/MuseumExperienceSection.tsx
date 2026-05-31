@@ -27,7 +27,7 @@
 
 export function MuseumExperienceSection() {
   return (
-    <section className="bg-[#030712] px-6 py-24">
+    <section className="bg-[#030712] px-5 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="max-w-3xl">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
@@ -69,3 +69,4 @@ export function MuseumExperienceSection() {
     </section>
   );
 }
+

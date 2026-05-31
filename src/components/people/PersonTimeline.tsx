@@ -2,7 +2,7 @@
 
 export function PersonTimeline({ timeline }: { timeline: TimelineEvent[] }) {
   return (
-    <section className="bg-[#061A2F] px-6 py-24">
+    <section className="bg-[#061A2F] px-5 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
@@ -60,3 +60,4 @@ export function PersonTimeline({ timeline }: { timeline: TimelineEvent[] }) {
     </section>
   );
 }
+

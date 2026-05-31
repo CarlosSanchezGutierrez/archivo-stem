@@ -2,7 +2,7 @@
 
 export default function NotFound() {
   return (
-    <section className="min-h-screen bg-[#05070A] px-6 py-24">
+    <section className="min-h-screen bg-[#05070A] px-5 py-16 md:px-6 md:py-24">
       <div className="mx-auto flex min-h-[65vh] max-w-4xl items-center justify-center">
         <div className="rounded-[2rem] border border-white/10 bg-white/[0.04] p-10 text-center">
           <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
@@ -45,3 +45,4 @@ export default function NotFound() {
     </section>
   );
 }
+

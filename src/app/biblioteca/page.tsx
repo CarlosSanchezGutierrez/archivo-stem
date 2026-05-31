@@ -8,7 +8,7 @@ export const metadata = {
 
 export default function LibraryPage() {
   return (
-    <section className="min-h-screen bg-[#05070A] px-6 py-24">
+    <section className="min-h-screen bg-[#05070A] px-5 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
           <div>
@@ -16,7 +16,7 @@ export default function LibraryPage() {
               Biblioteca
             </p>
 
-            <h1 className="mt-5 text-balance text-5xl font-semibold tracking-tight text-white md:text-6xl">
+            <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-white md:text-6xl">
               Objetos de conocimiento conectados con trayectorias STEM.
             </h1>
           </div>
@@ -44,3 +44,4 @@ export default function LibraryPage() {
     </section>
   );
 }
+

@@ -2,7 +2,7 @@
 
 export function PersonHero({ person }: { person: StemPersonProfile }) {
   return (
-    <section className="relative overflow-hidden bg-[#05070A] px-6 py-20">
+    <section className="relative overflow-hidden bg-[#05070A] px-5 py-16 md:px-6 md:py-20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(31,111,235,0.20),transparent_34%)]" />
       <div className="absolute inset-0 museum-grid" />
 
@@ -76,3 +76,4 @@ function Stat({ label, value }: { label: string; value?: number }) {
     </div>
   );
 }
+

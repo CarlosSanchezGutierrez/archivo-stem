@@ -15,7 +15,7 @@
 
 export function ConceptSection() {
   return (
-    <section className="bg-[#05070A] px-6 py-24">
+    <section className="bg-[#05070A] px-5 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-7xl">
         <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
           <div>
@@ -57,3 +57,4 @@ export function ConceptSection() {
     </section>
   );
 }
+

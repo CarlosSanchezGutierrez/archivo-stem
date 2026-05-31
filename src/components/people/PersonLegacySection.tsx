@@ -2,7 +2,7 @@
 
 export function PersonLegacySection({ person }: { person: StemPersonProfile }) {
   return (
-    <section className="bg-[#05070A] px-6 py-24">
+    <section className="bg-[#05070A] px-5 py-16 md:px-6 md:py-24">
       <div className="mx-auto max-w-5xl rounded-[2rem] border border-white/10 bg-white/[0.04] p-10 text-center shadow-2xl shadow-blue-950/20">
         <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
           Cápsula del tiempo
@@ -25,3 +25,4 @@ export function PersonLegacySection({ person }: { person: StemPersonProfile }) {
     </section>
   );
 }
+

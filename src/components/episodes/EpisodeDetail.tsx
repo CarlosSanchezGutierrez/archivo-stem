@@ -3,7 +3,7 @@
 export function EpisodeDetail({ episode }: { episode: Episode }) {
   return (
     <div className="bg-[#05070A]">
-      <section className="px-6 py-24">
+      <section className="px-5 py-16 md:px-6 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.8fr_1.2fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
@@ -40,7 +40,7 @@ export function EpisodeDetail({ episode }: { episode: Episode }) {
         </div>
       </section>
 
-      <section className="bg-[#061A2F] px-6 py-24">
+      <section className="bg-[#061A2F] px-5 py-16 md:px-6 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
@@ -96,7 +96,7 @@ export function EpisodeDetail({ episode }: { episode: Episode }) {
         </div>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="px-5 py-16 md:px-6 md:py-24">
         <div className="mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
             <div>
@@ -146,7 +146,7 @@ export function EpisodeDetail({ episode }: { episode: Episode }) {
         </div>
       </section>
 
-      <section className="bg-[#061A2F] px-6 py-24">
+      <section className="bg-[#061A2F] px-5 py-16 md:px-6 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.85fr_1.15fr]">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
@@ -183,7 +183,7 @@ export function EpisodeDetail({ episode }: { episode: Episode }) {
         </div>
       </section>
 
-      <section className="px-6 py-24">
+      <section className="px-5 py-16 md:px-6 md:py-24">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-2">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.24em] text-blue-300">
@@ -259,3 +259,4 @@ function Badge({ children }: { children: React.ReactNode }) {
     </span>
   );
 }
+

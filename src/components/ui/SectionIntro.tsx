@@ -12,7 +12,7 @@ export function SectionIntro({ eyebrow, title, description }: SectionIntroProps)
           {eyebrow}
         </p>
 
-        <h1 className="mt-5 text-balance text-5xl font-semibold tracking-tight text-white md:text-6xl">
+        <h1 className="mt-5 text-balance text-4xl font-semibold tracking-tight text-white md:text-6xl">
           {title}
         </h1>
       </div>
@@ -25,3 +25,4 @@ export function SectionIntro({ eyebrow, title, description }: SectionIntroProps)
     </div>
   );
 }
+

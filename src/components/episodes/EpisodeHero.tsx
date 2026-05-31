@@ -3,7 +3,7 @@ import type { Episode } from "@/data/episodes";
 
 export function EpisodeHero({ episode }: { episode: Episode }) {
   return (
-    <section className="relative overflow-hidden bg-[#05070A] px-6 py-20">
+    <section className="relative overflow-hidden bg-[#05070A] px-5 py-16 md:px-6 md:py-20">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(31,111,235,0.20),transparent_34%)]" />
       <div className="absolute inset-0 museum-grid" />
 
@@ -24,7 +24,7 @@ export function EpisodeHero({ episode }: { episode: Episode }) {
               </span>
             </div>
 
-            <h1 className="mt-6 max-w-4xl text-balance text-5xl font-semibold tracking-tight text-white md:text-6xl">
+            <h1 className="mt-6 max-w-4xl text-balance text-4xl font-semibold tracking-tight text-white md:text-6xl">
               {episode.title}
             </h1>
 
@@ -106,3 +106,4 @@ function MiniFact({ label, value }: { label: string; value: string }) {
     </div>
   );
 }
+

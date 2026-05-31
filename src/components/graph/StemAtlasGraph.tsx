@@ -245,7 +245,7 @@ export function StemAtlasGraph() {
             </div>
           </div>
 
-          <div className="h-[680px]">
+          <div className="graph-canvas">
             <ReactFlow
               nodes={nodes}
               edges={edges}
@@ -349,3 +349,4 @@ function ArchiveInstruction({
     </article>
   );
 }
+
