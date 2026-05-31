@@ -10,6 +10,7 @@
     { label: "Biblioteca", href: "/biblioteca" },
     { label: "Atlas STEM", href: "/atlas" },
     { label: "Rutas", href: "/rutas" },
+    { label: "Instituciones", href: "/instituciones" },
     { label: "FAQ", href: "/faq" },
   ],
   puenteImpactoUrl: "https://puenteimpacto.com",
