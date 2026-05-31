@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { siteConfig } from "@/config/site";
+import { ArchiveMark } from "@/components/ui/ArchiveMark";
 
 function isActive(pathname: string, href: string) {
   if (href === "/") return pathname === "/";
@@ -26,10 +27,7 @@ export function SiteHeader() {
           className="group flex min-w-0 items-center gap-3"
           onClick={() => setMobileOpen(false)}
         >
-          <div className="relative h-9 w-9 shrink-0 rounded-xl border border-blue-400/30 bg-[#07111f] shadow-[0_0_30px_rgba(47,129,247,0.16)]">
-            <div className="absolute inset-2 rounded-lg border border-blue-300/20" />
-            <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-200" />
-          </div>
+          <ArchiveMark compact />
 
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold tracking-[0.22em] text-white">

@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import { siteConfig } from "@/config/site";
+import { ArchiveMark } from "@/components/ui/ArchiveMark";
 
 export function SiteFooter() {
   return (
@@ -8,9 +9,8 @@ export function SiteFooter() {
         <div className="grid gap-10 lg:grid-cols-[1.35fr_0.8fr_0.8fr_0.9fr]">
           <div>
             <div className="flex items-center gap-3">
-              <div className="relative h-10 w-10 rounded-xl border border-blue-400/30 bg-[#07111f] shadow-[0_0_34px_rgba(47,129,247,0.16)]">
-                <div className="absolute inset-2 rounded-lg border border-blue-300/20" />
-              </div>
+              <ArchiveMark compact />
+
               <div>
                 <p className="text-sm font-semibold tracking-[0.24em] text-white">
                   ARCHIVO STEM
@@ -98,4 +98,3 @@ function FooterColumn({
     </div>
   );
 }
-

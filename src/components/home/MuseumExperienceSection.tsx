@@ -1,27 +1,31 @@
 ﻿const archiveLayers = [
   {
+    code: "SAL-01",
     label: "Sala",
     title: "Perfil de trayectoria",
     description:
       "Una página dedicada a cada persona con biografía, áreas, instituciones, línea temporal, entrevista, obra y proyectos.",
   },
   {
+    code: "OBJ-02",
     label: "Objeto",
     title: "Biblioteca curada",
     description:
-      "Cada libro, paper, patente, curso o proyecto se registra con contexto: qué es, por qué importa y cómo se conecta con la trayectoria.",
+      "Cada libro, paper, patente, curso o proyecto se registra con contexto: qué es, por qué importa y cómo se conecta.",
   },
   {
+    code: "RED-03",
     label: "Red",
     title: "Atlas de conocimiento",
     description:
-      "Personas, temas, campus, tecnologías y proyectos se conectan en una red navegable para entender relaciones entre áreas STEM.",
+      "Personas, temas, campus, tecnologías y proyectos se conectan en una red navegable para entender relaciones.",
   },
   {
+    code: "USO-04",
     label: "Uso",
     title: "Experiencia educativa",
     description:
-      "El archivo se convierte en rutas, actividades, preguntas, colecciones y materiales para estudiantes, profesores e instituciones.",
+      "El archivo se convierte en rutas, actividades, preguntas, colecciones y materiales para estudiantes e instituciones.",
   },
 ];
 
@@ -49,19 +53,31 @@ export function MuseumExperienceSection() {
           {archiveLayers.map((layer) => (
             <article
               key={layer.title}
-              className="archive-panel archive-panel-hover rounded-3xl p-6"
+              className="archive-dossier rounded-[1.5rem] border border-white/10 bg-white/[0.035] p-6 transition hover:border-blue-400/35 hover:bg-blue-500/[0.055]"
             >
-              <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-300">
-                {layer.label}
-              </p>
+              <div className="relative">
+                <div className="flex items-start justify-between gap-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.22em] text-blue-300">
+                    {layer.label}
+                  </p>
 
-              <h3 className="mt-5 text-xl font-semibold text-white">
-                {layer.title}
-              </h3>
+                  <span className="font-mono text-xs text-slate-500">
+                    {layer.code}
+                  </span>
+                </div>
 
-              <p className="mt-3 text-sm leading-7 text-slate-400">
-                {layer.description}
-              </p>
+                <h3 className="mt-5 text-xl font-semibold text-white">
+                  {layer.title}
+                </h3>
+
+                <p className="mt-3 text-sm leading-7 text-slate-400">
+                  {layer.description}
+                </p>
+
+                <div className="mt-6 h-6 rounded-full border border-white/10 bg-black/20 p-1">
+                  <div className="archive-measure h-full rounded-full opacity-60" />
+                </div>
+              </div>
             </article>
           ))}
         </div>
@@ -69,4 +85,3 @@ export function MuseumExperienceSection() {
     </section>
   );
 }
-

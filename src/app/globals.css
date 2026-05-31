@@ -127,6 +127,55 @@ select {
   box-shadow: 0 28px 90px rgba(30, 64, 175, 0.16);
 }
 
+.archive-blueprint {
+  background:
+    linear-gradient(rgba(125, 171, 232, 0.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 171, 232, 0.055) 1px, transparent 1px),
+    radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.14), transparent 22rem),
+    #06111f;
+  background-size: 32px 32px, 32px 32px, auto;
+}
+
+.archive-dossier {
+  position: relative;
+  overflow: hidden;
+}
+
+.archive-dossier::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255,255,255,0.08) 1px, transparent 1px),
+    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 72px 72px;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.archive-dossier::after {
+  content: "ARCHIVO STEM";
+  position: absolute;
+  right: -2.8rem;
+  bottom: 3.2rem;
+  transform: rotate(-90deg);
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  color: rgba(147, 197, 253, 0.28);
+  pointer-events: none;
+}
+
+.archive-measure {
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      rgba(147, 197, 253, 0.24) 0,
+      rgba(147, 197, 253, 0.24) 1px,
+      transparent 1px,
+      transparent 18px
+    );
+}
+
 .text-balance {
   text-wrap: balance;
 }

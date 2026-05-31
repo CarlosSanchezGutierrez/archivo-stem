@@ -1,30 +1,36 @@
 ﻿const systemRows = [
   {
+    code: "R-001",
     entity: "Persona",
     relation: "publicó",
     target: "Libro",
   },
   {
+    code: "R-002",
     entity: "Persona",
     relation: "desarrolló",
     target: "Proyecto",
   },
   {
+    code: "R-003",
     entity: "Persona",
     relation: "trabajó en",
     target: "Institución",
   },
   {
+    code: "R-004",
     entity: "Episodio",
     relation: "trata sobre",
     target: "Tema",
   },
   {
+    code: "R-005",
     entity: "Curso",
     relation: "enseña",
     target: "Concepto",
   },
   {
+    code: "R-006",
     entity: "Patente",
     relation: "aplica",
     target: "Tecnología",
@@ -52,18 +58,22 @@ export function KnowledgeSystemSection() {
             </p>
           </div>
 
-          <div className="archive-panel rounded-[1.75rem] p-6">
+          <div className="archive-blueprint rounded-[1.75rem] border border-white/10 p-6">
             <div className="space-y-3">
               {systemRows.map((row) => (
                 <div
                   key={`${row.entity}-${row.relation}-${row.target}`}
-                  className="grid grid-cols-[1fr_auto_1fr] items-center gap-3 rounded-2xl border border-white/10 bg-black/20 p-4"
+                  className="grid gap-3 rounded-2xl border border-white/10 bg-black/25 p-4 md:grid-cols-[72px_1fr_auto_1fr]"
                 >
+                  <div className="font-mono text-xs text-slate-500">
+                    {row.code}
+                  </div>
+
                   <div className="rounded-xl border border-blue-400/20 bg-blue-500/10 px-3 py-2 text-sm font-medium text-blue-100">
                     {row.entity}
                   </div>
 
-                  <div className="text-xs uppercase tracking-[0.18em] text-slate-500">
+                  <div className="self-center text-xs uppercase tracking-[0.18em] text-slate-500">
                     {row.relation}
                   </div>
 
@@ -91,4 +101,3 @@ export function KnowledgeSystemSection() {
     </section>
   );
 }
-
