@@ -58,6 +58,16 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+button {
+  cursor: pointer;
+}
+
+input,
+textarea,
+select {
+  font-size: 16px;
+}
+
 .rf-attribution {
   display: none;
 }
@@ -110,4 +120,19 @@ a {
 
 .text-balance {
   text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
+  }
 }
